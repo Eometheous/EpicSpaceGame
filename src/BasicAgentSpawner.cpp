@@ -7,8 +7,6 @@
 #include "BasicAgentSpawner.hpp"
 
 BasicAgentSpawner::BasicAgentSpawner() {
-    spawnRate = 1;
-    timeSinceLastSpawned = 0;
 }
 
 BasicAgentSpawner::BasicAgentSpawner(GameObject *t) {
@@ -46,4 +44,10 @@ void BasicAgentSpawner::spawnBasicAgent() {
 
 void BasicAgentSpawner::despawnAgent(int i) {
     basicAgents.erase(basicAgents.begin() + i);
+}
+
+void BasicAgentSpawner::reset() {
+    for (int i = 0; i < basicAgents.size(); i++) {
+        despawnAgent(i);
+    }
 }
