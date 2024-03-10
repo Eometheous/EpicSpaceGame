@@ -53,8 +53,14 @@ void BasicAgentSpawner::killAgent(int i) {
     basicAgents.erase(basicAgents.begin() + i);
 }
 
-void BasicAgentSpawner::reset() {
+void BasicAgentSpawner::despawnAll() {
     for (int i = 0; i < basicAgents.size(); i++) {
         despawnAgent(i);
+    }
+}
+
+void BasicAgentSpawner::killAll() {
+    for (int i = 0; i < basicAgents.size(); i++) {
+        killAgent(i);
     }
 }

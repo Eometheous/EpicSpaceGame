@@ -31,5 +31,6 @@ public:
     void despawnAgent(int i);
     void killAgent(int i);
     
-    void reset();
+    void despawnAll();
+    void killAll();
 };

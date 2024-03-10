@@ -30,7 +30,6 @@ void ofApp::setup(){
 void ofApp::update(){
     if (gameStarted && !gameOver)
     {
-        timeAlive = (ofGetElapsedTimeMillis() - startTime) / 1000;
         player.update();
         if (keymap.at('w')) {
             ofVec3f euler = player.rotationMatix.getRotate().getEuler();
@@ -56,7 +55,10 @@ void ofApp::update(){
         if (keymap.at('a')) player.rotationalForces = -5 * rotationForceMultiplier - player.rotationalVelocity;
         if (keymap.at('d')) player.rotationalForces = 5 * rotationForceMultiplier - player.rotationalVelocity;
         
-        basicAgentSpawner.update();
+        if (!gameWon) {
+            timeAlive = (ofGetElapsedTimeMillis() - startTime) / 1000;
+            basicAgentSpawner.update();
+        }
         
         for (int i = 0; i < basicAgentSpawner.basicAgents.size(); i++) {
             if (basicAgentSpawner.basicAgents.at(i).collision(&player)) {
@@ -66,6 +68,11 @@ void ofApp::update(){
         }
         
         if (energyLevel <= 0) gameOver = true;
+        
+        if (timeAlive >= timeRequiredToWin) {
+            gameWon = true;
+            basicAgentSpawner.despawnAll();
+        }
     }
     
     if (gameOver) {
@@ -126,6 +133,14 @@ void ofApp::draw(){
         ofDrawBitmapString("Press Spacebar to return to main menu", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
         ofDrawBitmapString("Press R to play again", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 90);
     }
+    
+    if (gameWon) {
+        ofSetColor(ofColor::white);
+        ofDrawBitmapString("You Won!", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2);
+        ofDrawBitmapString(timeAliveString, (ofGetWindowWidth() / 2) - 40, (ofGetWindowHeight()) / 2 + 30);
+        ofDrawBitmapString("Press Spacebar to return to main menu", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
+        ofDrawBitmapString("Press R to play again", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 90);
+    }
 }
 
 //--------------------------------------------------------------
@@ -137,9 +152,10 @@ void ofApp::exit(){
 void ofApp::keyPressed(int key){
     if (key == ' ') {
         if (!gameStarted) startGame();
-        if (gameOver) {
+        if (gameOver || gameWon) {
             gameOver = false;
             gameStarted = false;
+            gameWon = false;
         }
     }
     if (key == 'w') keymap.at('w') = true;
@@ -161,7 +177,7 @@ void ofApp::keyReleased(int key){
 void ofApp::startGame() {
     timeAlive = 0;
     startTime = ofGetElapsedTimeMillis();
-    basicAgentSpawner.reset();
+    basicAgentSpawner.killAll();
     
     player.setPosition(ofVec2f(ofWindowSettings().getWidth() / 2, ofWindowSettings().getHeight() / 2));
     player.velocity = ofVec2f();
@@ -180,6 +196,7 @@ void ofApp::startGame() {
     basicAgentSpawner.basicAgentSpawnLimit = basicAgentSpawnLimit;
     
     gameOver = false;
+    gameWon = false;
     gameStarted = true;
 }
 
