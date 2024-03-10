@@ -12,7 +12,7 @@ BasicAgent::BasicAgent() {
     lifespan = 5;
     birthTime = ofGetElapsedTimeMillis() / 1000;
     sprite.load("sprites/basic_enemy.png");
-    position = ofVec2f(rand() % (ofWindowSettings().getWidth() - 30 ) + 30, rand() % (ofWindowSettings().getHeight() - 30) + 30);
+    position = ofVec2f(rand() % (ofWindowSettings().getWidth() - 60 ) + 30, rand() % (ofWindowSettings().getHeight() - 60) + 30);
     rotationMatix.rotate(rand() % 360, 0, 0, sprite.getWidth());
 }
 
