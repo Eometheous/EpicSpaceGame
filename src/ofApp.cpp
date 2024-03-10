@@ -15,6 +15,14 @@ void ofApp::setup(){
     keymap.insert({'a', false});
     keymap.insert({'d', false});
     
+    gui.setup();
+    gui.add(startingEnergyLevel.setup("Starting Energy", 10, 1, 100));
+    gui.add(movementForceMultiplier.setup("Movement Force Multiplier", 1, .1, 10));
+    gui.add(rotationForceMultiplier.setup("Rotational Force Multiplier", 1, .1, 10));
+    gui.add(playerScale.setup("Player Scale", 1, .5, 10));
+    gui.add(basicAgentSpawnRate.setup("Agent Spawn Rate", 1, .5, 100));
+    gui.add(basicAgentLifespan.setup("Agent Life Span", 5, 1, 60));
+    gui.add(basicAgentSpawnLimit.setup("Agent Spawn Limit", 10, 1, 100));
 }
 
 //--------------------------------------------------------------
@@ -79,6 +87,8 @@ void ofApp::draw(){
     
     string timeAliveString;
     
+    if (!gameStarted) gui.draw();
+    
     if (gameStarted) {
         ofSetColor(255, 255, 255);
         player.draw();
@@ -136,6 +146,13 @@ void ofApp::startGame() {
     basicAgentSpawner.reset();
     
     player.setPosition(ofVec2f(ofWindowSettings().getWidth() / 2, ofWindowSettings().getHeight() / 2));
+    player.velocity = ofVec2f();
+    player.acceleration = ofVec2f();
+    
+    player.rotationMatix = ofMatrix4x4();
+    player.rotationalVelocity = 0;
+    player.rotationalForces = 0;
+    
     player.scale = 1;
     player.sprite.load("sprites/player.png");
     energyLevel = 10;

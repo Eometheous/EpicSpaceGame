@@ -5,6 +5,7 @@
 #include "BasicAgentSpawner.hpp"
 #include "GameObject.hpp"
 #include "unordered_map"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -39,6 +40,18 @@ public:
     int startTime;
     
     unordered_map<int, bool> keymap;
+    
+    ofxPanel gui;
+    
+    ofxIntSlider startingEnergyLevel;
+    ofxFloatSlider movementForceMultiplier;
+    ofxFloatSlider rotationForceMultiplier;
+    ofxFloatSlider playerScale;
+    
+    ofxFloatSlider basicAgentSpawnRate;
+    ofxFloatSlider basicAgentLifespan;
+    ofxIntSlider basicAgentSpawnLimit;
+    
     
     void startGame();
 };
