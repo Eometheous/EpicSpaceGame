@@ -48,6 +48,14 @@ void ofApp::update(){
         if (keymap.at('d')) player.rotationalForces = 5 - player.rotationalVelocity;
         
         basicAgentSpawner.update();
+        
+        for (int i = 0; i < basicAgentSpawner.basicAgents.size(); i++) {
+            if (basicAgentSpawner.basicAgents.at(i).collision(&player)) {
+                basicAgentSpawner.despawnAgent(i);
+                energyLevel -= 1;
+                cout <<energyLevel << endl;
+            }
+        }
     }
 }
 
