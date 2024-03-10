@@ -12,6 +12,8 @@ class GameObject {
 public:
     GameObject();
     
+    float scale;
+    
     ofVec2f position;
     ofVec2f velocity;
     ofVec2f acceleration;

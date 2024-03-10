@@ -9,7 +9,6 @@
 
 BasicAgent::BasicAgent() {
     age = 0;
-    lifespan = 5;
     birthTime = ofGetElapsedTimeMillis() / 1000;
     sprite.load("sprites/basic_enemy.png");
     position = ofVec2f(rand() % (ofWindowSettings().getWidth() - 60 ) + 30, rand() % (ofWindowSettings().getHeight() - 60) + 30);

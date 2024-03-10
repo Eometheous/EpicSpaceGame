@@ -35,25 +35,25 @@ void ofApp::update(){
             ofVec3f euler = player.rotationMatix.getRotate().getEuler();
             
             if (euler.x == 0) {
-                player.forces = ofVec2f(0, -500).rotate(euler.z) - player.velocity;
+                player.forces = ofVec2f(0, -500 * movementForceMultiplier).rotate(euler.z) - player.velocity;
             }
             else  {
-                player.forces = ofVec2f(0, -500).rotate(180 + euler.z * -1) - player.velocity;
+                player.forces = ofVec2f(0, -500 * movementForceMultiplier).rotate(180 + euler.z * -1) - player.velocity;
             }
         }
         if (keymap.at('s')) {
             ofVec3f euler = player.rotationMatix.getRotate().getEuler();
             
             if (euler.x == 0) {
-                player.forces = ofVec2f(0, 100).rotate(euler.z);
+                player.forces = ofVec2f(0, 100 * movementForceMultiplier).rotate(euler.z);
             }
             else  {
-                player.forces = ofVec2f(0, 100).rotate(180 + euler.z * -1);
+                player.forces = ofVec2f(0, 100 * movementForceMultiplier).rotate(180 + euler.z * -1);
             }
         }
         
-        if (keymap.at('a')) player.rotationalForces = -5 - player.rotationalVelocity;
-        if (keymap.at('d')) player.rotationalForces = 5 - player.rotationalVelocity;
+        if (keymap.at('a')) player.rotationalForces = -5 * rotationForceMultiplier - player.rotationalVelocity;
+        if (keymap.at('d')) player.rotationalForces = 5 * rotationForceMultiplier - player.rotationalVelocity;
         
         basicAgentSpawner.update();
         
@@ -61,7 +61,6 @@ void ofApp::update(){
             if (basicAgentSpawner.basicAgents.at(i).collision(&player)) {
                 basicAgentSpawner.despawnAgent(i);
                 energyLevel -= 1;
-                cout <<energyLevel << endl;
             }
         }
         
@@ -71,7 +70,7 @@ void ofApp::update(){
     if (gameOver) {
         player.sprite.load("sprites/dead_player.png");
         if (player.scale >= 0) {
-            player.rotationalForces = 5;
+            player.rotationalForces = 5 - player.rotationalVelocity;
             player.scale -= .01;
             player.update();
         }
@@ -102,7 +101,7 @@ void ofApp::draw(){
         ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, healthBarWidth, healthBarHeight);
         
         ofSetColor(0, 255, 0);
-        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevel / 10)), healthBarHeight);
+        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevel / startingEnergyLevel)), healthBarHeight);
     
         timeAliveString += "Time Alive: " + std::to_string(timeAlive);
         
@@ -113,7 +112,8 @@ void ofApp::draw(){
     if (gameOver) {
         ofDrawBitmapString("Game Over!", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2);
         ofDrawBitmapString(timeAliveString, (ofGetWindowWidth() / 2) - 40, (ofGetWindowHeight()) / 2 + 30);
-        ofDrawBitmapString("Press Spacebar to Play Again", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
+        ofDrawBitmapString("Press Spacebar to return to main menu", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
+        ofDrawBitmapString("Press R to play again", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 90);
     }
 }
 
@@ -124,11 +124,18 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == ' ') startGame();
+    if (key == ' ') {
+        if (!gameStarted) startGame();
+        if (gameOver) {
+            gameOver = false;
+            gameStarted = false;
+        }
+    }
     if (key == 'w') keymap.at('w') = true;
     if (key == 's') keymap.at('s') = true;
     if (key == 'a') keymap.at('a') = true;
     if (key == 'd') keymap.at('d') = true;
+    if (key == 'r') if (gameStarted) startGame();
     
 }
 
@@ -153,9 +160,14 @@ void ofApp::startGame() {
     player.rotationalVelocity = 0;
     player.rotationalForces = 0;
     
-    player.scale = 1;
+    player.scale = playerScale;
     player.sprite.load("sprites/player.png");
-    energyLevel = 10;
+    energyLevel = startingEnergyLevel;
+    
+    basicAgentSpawner.spawnRate = basicAgentSpawnRate;
+    basicAgentSpawner.lifespan = basicAgentLifespan;
+    basicAgentSpawner.basicAgentSpawnLimit = basicAgentSpawnLimit;
+    
     gameOver = false;
     gameStarted = true;
 }

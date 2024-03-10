@@ -26,6 +26,6 @@ void PlayerObject::draw() {
     ofPushMatrix();
     
     ofMultMatrix(rotationMatix * translation);
-    sprite.draw(-ofVec2f(19, 19), sprite.getWidth() * scale, sprite.getHeight() * scale);
+    sprite.draw(-ofVec2f(sprite.getWidth() * scale / 2, sprite.getHeight() * scale / 2), sprite.getWidth() * scale, sprite.getHeight() * scale);
     ofPopMatrix();
 }

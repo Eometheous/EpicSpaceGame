@@ -18,7 +18,6 @@ public:
     
     GameObject *target;
     float age;
-    float lifespan;
     float birthTime;
     
     

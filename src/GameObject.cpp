@@ -9,6 +9,7 @@
 
 
 GameObject::GameObject() {
+    scale = 1;
     position.set(0, 0);
     velocity.set(0, 0);
     acceleration.set(0, 0);
@@ -56,7 +57,7 @@ void GameObject::clamp() {
 }
 
 bool GameObject::collision(GameObject *otherObject) {
-    return (position - otherObject->position).length() < (sprite.getWidth() / 3 + otherObject->sprite.getWidth() / 3);
+    return (position - otherObject->position).length() < (sprite.getWidth() * scale / 3 + otherObject->sprite.getWidth() * otherObject->scale / 3);
 }
 
 

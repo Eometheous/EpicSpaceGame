@@ -19,6 +19,8 @@ public:
     
     GameObject *target;
     float spawnRate;
+    float lifespan;
+    float basicAgentSpawnLimit;
     float timeSinceLastSpawned;
     
     vector<BasicAgent> basicAgents;
