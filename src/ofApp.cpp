@@ -89,7 +89,10 @@ void ofApp::draw(){
     
     string timeAliveString;
     
-    if (!gameStarted) gui.draw();
+    if (!gameStarted) {
+        gui.draw();
+        ofDrawBitmapString("Press Spacebar to start the game", ofGetWindowWidth() / 2 - 120, ofGetWindowHeight() / 2 + 40);
+    }
     
     if (gameStarted) {
         player.draw();
