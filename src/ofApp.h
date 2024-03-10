@@ -28,11 +28,14 @@ public:
     void dragEvent(ofDragInfo dragInfo) override;
     void gotMessage(ofMessage msg) override;
     
+    ofImage background;
+    
     PlayerObject player;
     
     BasicAgentSpawner basicAgentSpawner;
     
-    float energyLevel;
+    int energyLevel;
+    float energyLevelAsFloat;
     
     bool gameStarted;
     bool gameOver;

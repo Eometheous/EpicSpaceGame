@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(60);
-    
+    background.load("sprites/background.png");
     gameStarted = false;
     gameOver = false;
     player = PlayerObject();
@@ -79,6 +79,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetColor(255, 255, 255);
+    background.draw(0, 0, background.getWidth(), background.getHeight());
+    
+    
     string frameRate;
     frameRate += "Frame Rate: " + std::to_string(ofGetFrameRate());
     ofSetColor(ofColor::white);
@@ -98,10 +102,13 @@ void ofApp::draw(){
         float healthBarHeight = 25;
         
         ofSetColor(255, 0, 0);
+        energyLevelAsFloat = energyLevel;
         ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, healthBarWidth, healthBarHeight);
         
         ofSetColor(0, 255, 0);
-        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevel / startingEnergyLevel)), healthBarHeight);
+        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevelAsFloat / startingEnergyLevel)), healthBarHeight);
+        ofSetColor(0, 0, 0);
+        ofDrawBitmapString(std::to_string(energyLevel) + " / " + std::to_string(startingEnergyLevel), ofWindowSettings().getWidth() / 2 - 25, 58);
     
         timeAliveString += "Time Alive: " + std::to_string(timeAlive);
         
