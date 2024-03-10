@@ -8,9 +8,7 @@
 #ifndef BasicAgent_hpp
 #define BasicAgent_hpp
 
-#import "ofMain.h"
 #import "GameObject.hpp"
-#import "PlayerObject.hpp"
 
 #endif /* BasicAgent_hpp */
 
@@ -21,6 +19,7 @@ public:
     GameObject *target;
     float age;
     float lifespan;
+    float birthTime;
     
     
     void update();
