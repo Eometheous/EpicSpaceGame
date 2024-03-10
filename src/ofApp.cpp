@@ -79,13 +79,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(255, 255, 255);
+    ofSetColor(ofColor::white);
     background.draw(0, 0, background.getWidth(), background.getHeight());
     
     
     string frameRate;
     frameRate += "Frame Rate: " + std::to_string(ofGetFrameRate());
-    ofSetColor(ofColor::white);
     ofDrawBitmapString(frameRate, ofGetWindowWidth() -170, 15);
     
     string timeAliveString;
@@ -93,7 +92,6 @@ void ofApp::draw(){
     if (!gameStarted) gui.draw();
     
     if (gameStarted) {
-        ofSetColor(255, 255, 255);
         player.draw();
         
         basicAgentSpawner.draw();
@@ -101,22 +99,24 @@ void ofApp::draw(){
         float healthBarWidth = 200;
         float healthBarHeight = 25;
         
-        ofSetColor(255, 0, 0);
+        ofSetColor(ofColor::red);
         energyLevelAsFloat = energyLevel;
         ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, healthBarWidth, healthBarHeight);
         
-        ofSetColor(0, 255, 0);
+        ofSetColor(ofColor::green);
         ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevelAsFloat / startingEnergyLevel)), healthBarHeight);
-        ofSetColor(0, 0, 0);
+        
+        ofSetColor(ofColor::black);
         ofDrawBitmapString(std::to_string(energyLevel) + " / " + std::to_string(startingEnergyLevel), ofWindowSettings().getWidth() / 2 - 25, 58);
     
-        timeAliveString += "Time Alive: " + std::to_string(timeAlive);
-        
-        if (!gameOver) ofDrawBitmapString(timeAlive, ofGetWindowWidth() -170, 30);
+        timeAliveString = "Time Alive: " + std::to_string(timeAlive);
+        ofSetColor(ofColor::white);
+        if (!gameOver) ofDrawBitmapString(timeAliveString, ofGetWindowWidth() -170, 30);
     
     }
     
     if (gameOver) {
+        ofSetColor(ofColor::white);
         ofDrawBitmapString("Game Over!", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2);
         ofDrawBitmapString(timeAliveString, (ofGetWindowWidth() / 2) - 40, (ofGetWindowHeight()) / 2 + 30);
         ofDrawBitmapString("Press Spacebar to return to main menu", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
