@@ -29,6 +29,7 @@ public:
     void draw();
     void spawnBasicAgent();
     void despawnAgent(int i);
+    void killAgent(int i);
     
     void reset();
 };

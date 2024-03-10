@@ -39,6 +39,8 @@ public:
     
     bool gameStarted;
     bool gameOver;
+    bool gameWon;
+    
     int timeAlive;
     int startTime;
     
@@ -47,6 +49,7 @@ public:
     ofxPanel gui;
     
     ofxIntSlider startingEnergyLevel;
+    ofxIntSlider timeRequiredToWin;
     ofxFloatSlider movementForceMultiplier;
     ofxFloatSlider rotationForceMultiplier;
     ofxFloatSlider playerScale;

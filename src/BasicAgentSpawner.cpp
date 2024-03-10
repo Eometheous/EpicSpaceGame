@@ -45,6 +45,11 @@ void BasicAgentSpawner::spawnBasicAgent() {
 }
 
 void BasicAgentSpawner::despawnAgent(int i) {
+    basicAgents.at(i).scale -= .05;
+    if (basicAgents.at(i).scale < 0) basicAgents.erase(basicAgents.begin() + i);
+}
+
+void BasicAgentSpawner::killAgent(int i) {
     basicAgents.erase(basicAgents.begin() + i);
 }
 

@@ -25,11 +25,14 @@ void BasicAgent::update() {
 void BasicAgent::draw() {
     ofMatrix4x4 translation = ofMatrix4x4();
     translation.translate(position);
+    ofMatrix4x4 scaleMatrix = ofMatrix4x4();
+    
+    scaleMatrix.scale(scale, scale, 0);
     
     ofPushMatrix();
     
-    ofMultMatrix(rotationMatix * translation);
-    sprite.draw(-ofVec2f(19, 19), 38, 38);
+    ofMultMatrix(scaleMatrix * rotationMatix * translation);
+    sprite.draw(-ofVec2f(sprite.getWidth() / 2, sprite.getHeight() / 2), sprite.getWidth() , sprite.getHeight());
     ofPopMatrix();
 }
 

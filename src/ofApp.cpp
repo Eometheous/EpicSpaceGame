@@ -17,6 +17,7 @@ void ofApp::setup(){
     
     gui.setup();
     gui.add(startingEnergyLevel.setup("Starting Energy", 10, 1, 100));
+    gui.add(timeRequiredToWin.setup("Time Required to Win", 30, 10, 60));
     gui.add(movementForceMultiplier.setup("Movement Force Multiplier", 1, .1, 10));
     gui.add(rotationForceMultiplier.setup("Rotational Force Multiplier", 1, .1, 10));
     gui.add(playerScale.setup("Player Scale", 1, .5, 10));
@@ -59,7 +60,7 @@ void ofApp::update(){
         
         for (int i = 0; i < basicAgentSpawner.basicAgents.size(); i++) {
             if (basicAgentSpawner.basicAgents.at(i).collision(&player)) {
-                basicAgentSpawner.despawnAgent(i);
+                basicAgentSpawner.killAgent(i);
                 energyLevel -= 1;
             }
         }
