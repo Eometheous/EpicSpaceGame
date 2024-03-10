@@ -31,9 +31,14 @@ public:
     
     BasicAgentSpawner basicAgentSpawner;
     
-    int energyLevel;
+    float energyLevel;
     
     bool gameStarted;
+    bool gameOver;
+    int timeAlive;
+    int startTime;
     
     unordered_map<int, bool> keymap;
+    
+    void startGame();
 };

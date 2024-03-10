@@ -5,9 +5,8 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     
     gameStarted = false;
-    energyLevel = 10;
+    gameOver = false;
     player = PlayerObject();
-    player.setPosition(ofVec2f(ofWindowSettings().getWidth() / 2, ofWindowSettings().getHeight() / 2));
     
     basicAgentSpawner = BasicAgentSpawner(&player);
     
@@ -20,8 +19,9 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if (gameStarted)
+    if (gameStarted && !gameOver)
     {
+        timeAlive = (ofGetElapsedTimeMillis() - startTime) / 1000;
         player.update();
         if (keymap.at('w')) {
             ofVec3f euler = player.rotationMatix.getRotate().getEuler();
@@ -56,21 +56,55 @@ void ofApp::update(){
                 cout <<energyLevel << endl;
             }
         }
+        
+        if (energyLevel <= 0) gameOver = true;
+    }
+    
+    if (gameOver) {
+        player.sprite.load("sprites/dead_player.png");
+        if (player.scale >= 0) {
+            player.rotationalForces = 5;
+            player.scale -= .01;
+            player.update();
+        }
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    string frameRate;
+    frameRate += "Frame Rate: " + std::to_string(ofGetFrameRate());
+    ofSetColor(ofColor::white);
+    ofDrawBitmapString(frameRate, ofGetWindowWidth() -170, 15);
+    
+    string timeAliveString;
+    
     if (gameStarted) {
+        ofSetColor(255, 255, 255);
         player.draw();
         
         basicAgentSpawner.draw();
+        
+        float healthBarWidth = 200;
+        float healthBarHeight = 25;
+        
+        ofSetColor(255, 0, 0);
+        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, healthBarWidth, healthBarHeight);
+        
+        ofSetColor(0, 255, 0);
+        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevel / 10)), healthBarHeight);
+    
+        timeAliveString += "Time Alive: " + std::to_string(timeAlive);
+        
+        if (!gameOver) ofDrawBitmapString(timeAlive, ofGetWindowWidth() -170, 30);
+    
     }
     
-    string str;
-    str += "Frame Rate: " + std::to_string(ofGetFrameRate());
-    ofSetColor(ofColor::white);
-    ofDrawBitmapString(str, ofGetWindowWidth() -170, 15);
+    if (gameOver) {
+        ofDrawBitmapString("Game Over!", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2);
+        ofDrawBitmapString(timeAliveString, (ofGetWindowWidth() / 2) - 40, (ofGetWindowHeight()) / 2 + 30);
+        ofDrawBitmapString("Press Spacebar to Play Again", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
+    }
 }
 
 //--------------------------------------------------------------
@@ -80,7 +114,7 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == ' ') gameStarted = true;
+    if (key == ' ') startGame();
     if (key == 'w') keymap.at('w') = true;
     if (key == 's') keymap.at('s') = true;
     if (key == 'a') keymap.at('a') = true;
@@ -94,6 +128,19 @@ void ofApp::keyReleased(int key){
     if (key == 's') keymap.at('s') = false;
     if (key == 'a') keymap.at('a') = false;
     if (key == 'd') keymap.at('d') = false;
+}
+
+void ofApp::startGame() {
+    timeAlive = 0;
+    startTime = ofGetElapsedTimeMillis();
+    basicAgentSpawner.reset();
+    
+    player.setPosition(ofVec2f(ofWindowSettings().getWidth() / 2, ofWindowSettings().getHeight() / 2));
+    player.scale = 1;
+    player.sprite.load("sprites/player.png");
+    energyLevel = 10;
+    gameOver = false;
+    gameStarted = true;
 }
 
 //--------------------------------------------------------------
