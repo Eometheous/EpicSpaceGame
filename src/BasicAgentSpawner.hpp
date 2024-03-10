@@ -14,11 +14,17 @@
 
 class BasicAgentSpawner {
 public:
+    BasicAgentSpawner();
+    BasicAgentSpawner(GameObject *target);
+    
+    GameObject *target;
     float spawnRate;
     float timeSinceLastSpawned;
     
     vector<BasicAgent> basicAgents;
     
     void update();
+    void draw();
     void spawnBasicAgent();
+    void despawnAgent(int i);
 };
