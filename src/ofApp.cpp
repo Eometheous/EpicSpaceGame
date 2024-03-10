@@ -5,11 +5,11 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     
     gameStarted = false;
+    energyLevel = 10;
     player = PlayerObject();
     player.setPosition(ofVec2f(ofWindowSettings().getWidth() / 2, ofWindowSettings().getHeight() / 2));
     
-    basicAgent = BasicAgent();
-    basicAgent.setTarget(&player);
+    basicAgentSpawner = BasicAgentSpawner(&player);
     
     keymap.insert({'w', false});
     keymap.insert({'s', false});
@@ -47,7 +47,7 @@ void ofApp::update(){
         if (keymap.at('a')) player.rotationalForces = -5 - player.rotationalVelocity;
         if (keymap.at('d')) player.rotationalForces = 5 - player.rotationalVelocity;
         
-        basicAgent.update();
+        basicAgentSpawner.update();
     }
 }
 
@@ -56,7 +56,7 @@ void ofApp::draw(){
     if (gameStarted) {
         player.draw();
         
-        basicAgent.draw();
+        basicAgentSpawner.draw();
     }
     
     string str;

@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "PlayerObject.hpp"
-#include "BasicAgent.hpp"
+#include "BasicAgentSpawner.hpp"
 #include "GameObject.hpp"
 #include "unordered_map"
 
@@ -28,7 +28,10 @@ public:
     void gotMessage(ofMessage msg) override;
     
     PlayerObject player;
-    BasicAgent basicAgent;
+    
+    BasicAgentSpawner basicAgentSpawner;
+    
+    int energyLevel;
     
     bool gameStarted;
     
