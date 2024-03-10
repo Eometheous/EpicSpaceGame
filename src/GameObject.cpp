@@ -55,4 +55,8 @@ void GameObject::clamp() {
     }
 }
 
+bool GameObject::collision(GameObject *otherObject) {
+    return (position - otherObject->position).length() < (sprite.getWidth() / 3 + otherObject->sprite.getWidth() / 3);
+}
+
 

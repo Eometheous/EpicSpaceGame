@@ -30,4 +30,5 @@ public:
     virtual void draw() = 0;
     
     void clamp();
+    bool collision(GameObject *otherObject);
 };
