@@ -7,14 +7,12 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "ofMain.h"
 
 
 class PlayerObject: public GameObject {
 public:
     PlayerObject();
     
-    int nEnergy;
     float scale;
     
     void update();

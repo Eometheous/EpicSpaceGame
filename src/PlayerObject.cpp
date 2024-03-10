@@ -10,7 +10,6 @@
 #include "PlayerObject.hpp"
 
 PlayerObject::PlayerObject() {
-    nEnergy = 10;
     scale = 1;
     sprite.load("sprites/player.png");
 }
