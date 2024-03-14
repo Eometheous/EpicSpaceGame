@@ -153,7 +153,6 @@ void ofApp::keyPressed(int key){
     if (key == ' ') {
         if (!gameStarted) startGame();
         if (gameOver || gameWon) {
-            cout << "Killed agents" << endl;
             basicAgentSpawner.killAll();
             gameOver = false;
             gameStarted = false;
