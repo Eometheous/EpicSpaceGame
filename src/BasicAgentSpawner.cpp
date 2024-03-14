@@ -50,7 +50,7 @@ void BasicAgentSpawner::despawnAgent(int i) {
 }
 
 void BasicAgentSpawner::killAgent(int i) {
-    basicAgents.erase(basicAgents.begin() + i);
+    basicAgents.erase(basicAgents.begin());
 }
 
 void BasicAgentSpawner::despawnAll() {
@@ -60,7 +60,7 @@ void BasicAgentSpawner::despawnAll() {
 }
 
 void BasicAgentSpawner::killAll() {
-    for (int i = 0; i < basicAgents.size(); i++) {
-        killAgent(i);
+    while (basicAgents.size() > 0) {
+        killAgent(0);
     }
 }

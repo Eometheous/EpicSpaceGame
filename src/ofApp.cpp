@@ -153,6 +153,8 @@ void ofApp::keyPressed(int key){
     if (key == ' ') {
         if (!gameStarted) startGame();
         if (gameOver || gameWon) {
+            cout << "Killed agents" << endl;
+            basicAgentSpawner.killAll();
             gameOver = false;
             gameStarted = false;
             gameWon = false;
@@ -177,7 +179,6 @@ void ofApp::keyReleased(int key){
 void ofApp::startGame() {
     timeAlive = 0;
     startTime = ofGetElapsedTimeMillis();
-    basicAgentSpawner.killAll();
     
     player.setPosition(ofVec2f(ofWindowSettings().getWidth() / 2, ofWindowSettings().getHeight() / 2));
     player.velocity = ofVec2f();
