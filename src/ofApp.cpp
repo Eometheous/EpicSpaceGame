@@ -14,6 +14,7 @@ void ofApp::setup(){
     keymap.insert({'s', false});
     keymap.insert({'a', false});
     keymap.insert({'d', false});
+    keymap.insert({' ', false});
     
     gui.setup();
     gui.add(startingEnergyLevel.setup("Starting Energy", 10, 1, 100));
@@ -55,6 +56,8 @@ void ofApp::update(){
         if (keymap.at('a')) player.rotationalForces = -5 * rotationForceMultiplier - player.rotationalVelocity;
         if (keymap.at('d')) player.rotationalForces = 5 * rotationForceMultiplier - player.rotationalVelocity;
         
+        player.gun.firing = keymap.at(' ');
+        
         if (!gameWon) {
             timeAlive = (ofGetElapsedTimeMillis() - startTime) / 1000;
             basicAgentSpawner.update();
@@ -65,6 +68,8 @@ void ofApp::update(){
                 basicAgentSpawner.killAgent(i);
                 energyLevel -= 1;
             }
+            
+            if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) basicAgentSpawner.killAgent(i);
         }
         
         if (energyLevel <= 0) gameOver = true;
@@ -164,6 +169,7 @@ void ofApp::keyPressed(int key){
     if (key == 'a') keymap.at('a') = true;
     if (key == 'd') keymap.at('d') = true;
     if (key == 'r') if (gameStarted) startGame();
+    if (key == ' ') keymap.at(' ') = true;
     
 }
 
@@ -173,6 +179,7 @@ void ofApp::keyReleased(int key){
     if (key == 's') keymap.at('s') = false;
     if (key == 'a') keymap.at('a') = false;
     if (key == 'd') keymap.at('d') = false;
+    if (key == ' ') keymap.at(' ') = false;
 }
 
 void ofApp::startGame() {
