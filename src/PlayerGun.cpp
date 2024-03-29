@@ -16,6 +16,12 @@ PlayerGun::PlayerGun() {
     heading = ofVec2f();
     deviance = 0;
     alive = true;
+    gunSound1.load("sounds/GunFire1.wav");
+    gunSound1.setVolume(.1);
+    gunSound2.load("sounds/GunFire2.wav");
+    gunSound2.setVolume(.1);
+    gunSound3.load("sounds/GunFire3.wav");
+    gunSound3.setVolume(.1);
 }
 
 void PlayerGun::update() {
@@ -49,6 +55,10 @@ void PlayerGun::fire() {
     newBullet.position = pos;
     newBullet.velocity = (heading.rotate(ofRandom(-sqrt(deviance), sqrt(deviance)))) * 500;
     firedBullets.push_back(newBullet);
+    int soundToPlay = ofRandom(3);
+    if (soundToPlay == 0) gunSound1.play();
+    else if (soundToPlay == 1) gunSound2.play();
+    else gunSound3.play();
 }
 
 void PlayerGun::despawnBullet(int i) {

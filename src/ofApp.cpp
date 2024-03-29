@@ -6,7 +6,6 @@ void ofApp::setup(){
     background.load("sprites/background.png");
     gameStarted = false;
     gameOver = false;
-    player = PlayerObject();
     
     basicAgentSpawner = BasicAgentSpawner(&player);
     
@@ -15,6 +14,15 @@ void ofApp::setup(){
     keymap.insert({'a', false});
     keymap.insert({'d', false});
     keymap.insert({' ', false});
+    
+    thrusterSound.load("sounds/Thrusters.wav");
+    thrusterSound.setVolume(.2);
+    hitSound1.load("sounds/Hit1.wav");
+    hitSound2.load("sounds/Hit2.wav");
+    hitSound3.load("sounds/Hit3.wav");
+    explosionSound1.load("sounds/Explosion1.wav");
+    explosionSound2.load("sounds/Explosion2.wav");
+    explosionSound3.load("sounds/BurstFire.wav");
     
     gui.setup();
     gui.add(startingEnergyLevel.setup("Starting Energy", 10, 1, 100));
@@ -56,6 +64,11 @@ void ofApp::update(){
         if (keymap.at('a')) player.rotationalForces = -5 * rotationForceMultiplier - player.rotationalVelocity;
         if (keymap.at('d')) player.rotationalForces = 5 * rotationForceMultiplier - player.rotationalVelocity;
         
+        if ((keymap.at('w') || keymap.at('s') || keymap.at('a') || keymap.at('d')) && !thrusterSound.isPlaying()) {
+            thrusterSound.play();
+        }
+        else if (!(keymap.at('w') || keymap.at('s') || keymap.at('a') || keymap.at('d'))) thrusterSound.stop();
+        
         player.gun.firing = keymap.at(' ');
         
         if (!gameWon) {
@@ -67,6 +80,10 @@ void ofApp::update(){
             if (basicAgentSpawner.basicAgents.at(i).collision(&player)) {
                 basicAgentSpawner.killAgent(i);
                 energyLevel -= 1;
+                int soundToPlay = ofRandom(3);
+                if (soundToPlay == 0) hitSound1.play();
+                else if (soundToPlay == 1) hitSound2.play();
+                else hitSound3.play();
             }
             
             else if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) {
@@ -76,6 +93,10 @@ void ofApp::update(){
         }
         
         if ((energyLevel <= 0 || player.gun.deviance >= 1000) && !gameWon) {
+            thrusterSound.stop();
+            explosionSound1.play();
+            explosionSound2.play();
+            explosionSound3.play();
             gameOver = true;
             player.gun.firing = false;
             player.gun.alive = false;

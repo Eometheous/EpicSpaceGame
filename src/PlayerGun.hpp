@@ -23,6 +23,10 @@ public:
     float deviance;
     bool alive;
     
+    ofSoundPlayer gunSound1;
+    ofSoundPlayer gunSound2;
+    ofSoundPlayer gunSound3;
+    
     vector<Bullet> firedBullets;
     
     PlayerGun();

@@ -48,6 +48,14 @@ public:
     
     ofxPanel gui;
     
+    ofSoundPlayer thrusterSound;
+    ofSoundPlayer hitSound1;
+    ofSoundPlayer hitSound2;
+    ofSoundPlayer hitSound3;
+    ofSoundPlayer explosionSound1;
+    ofSoundPlayer explosionSound2;
+    ofSoundPlayer explosionSound3;
+    
     ofxIntSlider startingEnergyLevel;
     ofxIntSlider timeRequiredToWin;
     ofxFloatSlider movementForceMultiplier;
