@@ -9,6 +9,7 @@
 #define BasicAgentSpawner_hpp
 
 #include "BasicAgent.hpp"
+#include "Explosion.hpp"
 
 #endif /* BasicAgentSpawner_hpp */
 
@@ -24,6 +25,7 @@ public:
     float timeSinceLastSpawned;
     
     vector<BasicAgent> basicAgents;
+    vector<Explosion> explosions;
     
     void update();
     void draw();

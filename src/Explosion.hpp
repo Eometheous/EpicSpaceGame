@@ -17,6 +17,9 @@ public:
     vector<Particle*> explosionParticles;
     bool exploding;
     int explosionForce;
+    float explodedAtTime;
+    
+    ofSoundPlayer explosion;
     
     Explosion();
     void update();

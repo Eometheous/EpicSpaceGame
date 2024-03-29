@@ -13,6 +13,8 @@ Explosion::Explosion() {
         explosionParticles.push_back(new Particle());
         explosionParticles.at(i)->sprite.load("sprites/bullet.png");
     }
+    explosion.load("sounds/Explosion3.wav");
+    explosion.setVolume(.1);
 }
 
 void Explosion::update() {
@@ -37,6 +39,8 @@ void Explosion::explode(ofVec2f at, ofVec2f initialVelocity) {
         explosionParticles.at(i)->velocity += initialVelocity;
     }
     exploding = true;
+    explodedAtTime = ofGetElapsedTimeMillis();
+    explosion.play();
 }
 
 void Explosion::reset() {
