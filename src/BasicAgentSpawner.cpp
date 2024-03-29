@@ -27,7 +27,7 @@ void BasicAgentSpawner::update() {
     
     for (int i = 0; i < basicAgents.size(); i++) {
         basicAgents.at(i).update();
-        if (basicAgents.at(i).age > lifespan) despawnAgent(i);
+        if (basicAgents.at(i).age > lifespan * 1000) despawnAgent(i);
     }
 }
 

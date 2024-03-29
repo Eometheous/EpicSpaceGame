@@ -9,14 +9,15 @@
 
 BasicAgent::BasicAgent() {
     age = 0;
-    birthTime = ofGetElapsedTimeMillis() / 1000;
+    birthTime = ofGetElapsedTimeMillis();
     sprite.load("sprites/basic_enemy.png");
     position = ofVec2f(rand() % (ofWindowSettings().getWidth() - 60 ) + 30, rand() % (ofWindowSettings().getHeight() - 60) + 30);
     rotationMatix.rotate(rand() % 360, 0, 0, sprite.getWidth());
 }
 
 void BasicAgent::update() {
-    age = (ofGetElapsedTimeMillis() / 1000) - birthTime;
+    age = (ofGetElapsedTimeMillis()) - birthTime;
+    cout << age << endl;
     chase();
     integrate();
     clamp();
