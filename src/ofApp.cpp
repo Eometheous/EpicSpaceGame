@@ -227,6 +227,7 @@ void ofApp::keyReleased(int key){
 }
 
 void ofApp::startGame() {
+    basicAgentSpawner.despawnAll();
     timeAlive = 0;
     startTime = ofGetElapsedTimeMillis();
     
