@@ -9,7 +9,7 @@
 
 Explosion::Explosion() {
     explosionForce = 50;
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 50; i++) {
         explosionParticles.push_back(new Particle());
         explosionParticles.at(i)->sprite.load("sprites/bullet.png");
     }

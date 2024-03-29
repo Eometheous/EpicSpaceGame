@@ -32,7 +32,7 @@ public:
     void spawnBasicAgent();
     void despawnAgent(int i);
     void killAgent(int i);
-    
+    void explodeAgent(int i);
     void despawnAll();
     void killAll();
 };

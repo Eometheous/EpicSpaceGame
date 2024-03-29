@@ -22,7 +22,7 @@ void ofApp::setup(){
     hitSound3.load("sounds/Hit3.wav");
     explosionSound1.load("sounds/Explosion1.wav");
     explosionSound2.load("sounds/Explosion2.wav");
-    explosionSound3.load("sounds/BurstFire.wav");
+    explosionSound3.load("sounds/Explosion3.wav");
     
     gui.setup();
     gui.add(startingEnergyLevel.setup("Starting Energy", 10, 1, 100));
@@ -78,7 +78,7 @@ void ofApp::update(){
         
         for (int i = 0; i < basicAgentSpawner.basicAgents.size(); i++) {
             if (basicAgentSpawner.basicAgents.at(i).collision(&player)) {
-                basicAgentSpawner.killAgent(i);
+                basicAgentSpawner.explodeAgent(i);
                 energyLevel -= 1;
                 int soundToPlay = ofRandom(3);
                 if (soundToPlay == 0) hitSound1.play();
@@ -87,7 +87,7 @@ void ofApp::update(){
             }
             
             else if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) {
-                basicAgentSpawner.killAgent(i);
+                basicAgentSpawner.explodeAgent(i);
                 if (energyLevel < startingEnergyLevel) energyLevel += 1;
             }
         }

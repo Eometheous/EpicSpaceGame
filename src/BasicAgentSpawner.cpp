@@ -58,12 +58,16 @@ void BasicAgentSpawner::despawnAgent(int i) {
 }
 
 void BasicAgentSpawner::killAgent(int i) {
+    basicAgents.erase(basicAgents.begin() + i);
+}
+
+void BasicAgentSpawner::explodeAgent(int i) {
     Explosion explosion;
     explosion.explosionForce = 10;
     explosion.reset();
     explosion.explode(basicAgents.at(i).position, basicAgents.at(i).velocity);
     explosions.push_back(explosion);
-    basicAgents.erase(basicAgents.begin() + i);
+    killAgent(i);
 }
 
 void BasicAgentSpawner::despawnAll() {
