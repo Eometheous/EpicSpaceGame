@@ -5,21 +5,21 @@
 //  Created by Jonathan Thomas on 3/27/24.
 //
 
-#include "Bullet.hpp"
+#include "Particle.hpp"
 
-Bullet::Bullet() {
+Particle::Particle() {
     age = 0;
     birthtime = ofGetElapsedTimeMillis() / 1000;
     sprite.load("sprites/bullet.png");
     position = ofVec2f();
 }
 
-void Bullet::update() {
+void Particle::update() {
     age = (ofGetElapsedTimeMillis() / 1000) - birthtime;
     integrate();
 }
 
-void Bullet::draw() {
+void Particle::draw() {
     ofMatrix4x4 translation = ofMatrix4x4();
     translation.translate(position);
     ofMatrix4x4 scaleMatrix = ofMatrix4x4();

@@ -7,17 +7,17 @@
 
 #ifndef Bullet_hpp
 #define Bullet_hpp
-
+#pragma once
 #include "GameObject.hpp"
 
 #endif /* Bullet_hpp */
 
-class Bullet: public GameObject {
+class Particle: public GameObject {
 public:
     float age;
     float birthtime;
     
-    Bullet();
+    Particle();
     void update();
     void draw();
 };
