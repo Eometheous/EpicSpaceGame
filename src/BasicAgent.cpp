@@ -17,7 +17,6 @@ BasicAgent::BasicAgent() {
 
 void BasicAgent::update() {
     age = (ofGetElapsedTimeMillis()) - birthTime;
-    cout << age << endl;
     chase();
     integrate();
     clamp();
