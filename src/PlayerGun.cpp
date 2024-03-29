@@ -67,7 +67,10 @@ void PlayerGun::despawnBullet(int i) {
 
 bool PlayerGun::checkHit(GameObject &o) {
     for (int i = 0; i < firedBullets.size(); i++) {
-        if (o.collision(&firedBullets.at(i))) return true;
+        if (o.collision(&firedBullets.at(i))) {
+            despawnBullet(i);
+            return true;
+        }
     }
     return false;
 }
