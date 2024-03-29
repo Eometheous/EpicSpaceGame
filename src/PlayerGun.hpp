@@ -21,6 +21,7 @@ public:
     ofVec2f pos;
     ofVec2f heading;
     float deviance;
+    bool alive;
     
     vector<Bullet> firedBullets;
     

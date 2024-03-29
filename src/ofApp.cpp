@@ -56,15 +56,7 @@ void ofApp::update(){
         if (keymap.at('a')) player.rotationalForces = -5 * rotationForceMultiplier - player.rotationalVelocity;
         if (keymap.at('d')) player.rotationalForces = 5 * rotationForceMultiplier - player.rotationalVelocity;
         
-        if (keymap.at(' ')) {
-            player.gun.firing = true;
-            player.gun.deviance += 1;
-        }
-        else {
-            player.gun.firing = false;
-            player.gun.deviance = 0;
-        }
-        
+        player.gun.firing = keymap.at(' ');
         
         if (!gameWon) {
             timeAlive = (ofGetElapsedTimeMillis() - startTime) / 1000;
@@ -77,12 +69,16 @@ void ofApp::update(){
                 energyLevel -= 1;
             }
             
-            else if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) basicAgentSpawner.killAgent(i);
+            else if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) {
+                basicAgentSpawner.killAgent(i);
+                if (energyLevel < startingEnergyLevel) energyLevel += 1;
+            }
         }
         
-        if (energyLevel <= 0) {
+        if ((energyLevel <= 0 || player.gun.deviance >= 1000) && !gameWon) {
             gameOver = true;
             player.gun.firing = false;
+            player.gun.alive = false;
         }
         
         if (timeAlive >= timeRequiredToWin) {
@@ -123,19 +119,35 @@ void ofApp::draw(){
         
         basicAgentSpawner.draw();
         
-        float healthBarWidth = 200;
-        float healthBarHeight = 25;
+        float barWidth = 200;
+        float barHeight = 25;
         
         ofSetColor(ofColor::red);
         energyLevelAsFloat = energyLevel;
-        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, healthBarWidth, healthBarHeight);
+        ofDrawRectangle(20, 20, barWidth, barHeight);
         
         ofSetColor(ofColor::green);
-        ofDrawRectangle(ofWindowSettings().getWidth() / 2 - healthBarWidth / 2, 40, (healthBarWidth * (energyLevelAsFloat / startingEnergyLevel)), healthBarHeight);
+        ofDrawRectangle(20, 20, (barWidth * (energyLevelAsFloat / startingEnergyLevel)), barHeight);
         
+        ofSetColor(ofColor::white);
+        ofDrawBitmapString("Energy Level", 70, 17);
         ofSetColor(ofColor::black);
-        ofDrawBitmapString(std::to_string(energyLevel) + " / " + std::to_string(startingEnergyLevel), ofWindowSettings().getWidth() / 2 - 25, 58);
+        ofDrawBitmapString(std::to_string(energyLevel) + " / " + std::to_string(startingEnergyLevel), 90, 37);
     
+        ofSetColor(ofColor::green);
+        float devianceFloat = player.gun.deviance;
+        ofDrawRectangle(260, 20, barWidth, barHeight);
+        
+        ofSetColor(ofColor::red);
+        ofDrawRectangle(260, 20, (barWidth * (devianceFloat / 1000)), barHeight);
+        
+        ofSetColor(ofColor::white);
+        ofDrawBitmapString("Gun Stability", 300, 17);
+        ofSetColor(ofColor::black);
+        int deviance = player.gun.deviance;
+        ofDrawBitmapString(std::to_string(deviance) + " / 1000", 290, 37);
+        
+        
         timeAliveString = "Time Alive: " + std::to_string(timeAlive);
         ofSetColor(ofColor::white);
         if (!gameOver) ofDrawBitmapString(timeAliveString, ofGetWindowWidth() -170, 30);
@@ -216,6 +228,8 @@ void ofApp::startGame() {
     gameOver = false;
     gameWon = false;
     gameStarted = true;
+    player.gun.alive = true;
+    player.gun.deviance = 0;
 }
 
 //--------------------------------------------------------------

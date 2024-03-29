@@ -15,14 +15,21 @@ PlayerGun::PlayerGun() {
     pos = ofVec2f();
     heading = ofVec2f();
     deviance = 0;
+    alive = true;
 }
 
 void PlayerGun::update() {
     float time = ofGetElapsedTimeMillis();
     
-    if (firing && (time - timeSinceLastSpawned) > (1000 / fireRate) + (deviance/50) * (deviance/50)) {
-        fire();
-        timeSinceLastSpawned = time;
+    if (firing) {
+        if (time - timeSinceLastSpawned > (1000 / fireRate) + (deviance/50) * (deviance/50)) {
+            fire();
+            timeSinceLastSpawned = time;
+        }
+        if (deviance < 1000) deviance += 1;
+    }
+    else if (deviance > 0 && alive){
+        deviance -= 1;
     }
     
     for (int i = 0; i < firedBullets.size(); i++) {
