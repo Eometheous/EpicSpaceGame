@@ -51,7 +51,7 @@ void PlayerGun::draw() {
 }
 
 void PlayerGun::fire() {
-    Bullet newBullet;
+    Particle newBullet;
     newBullet.position = pos;
     newBullet.velocity = (heading.rotate(ofRandom(-sqrt(deviance), sqrt(deviance)))) * 500;
     firedBullets.push_back(newBullet);

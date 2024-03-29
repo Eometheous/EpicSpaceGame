@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070C1BEE2BB4DDE900A47250 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 070C1BEC2BB4DDE900A47250 /* Bullet.cpp */; };
+		070C1BEE2BB4DDE900A47250 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 070C1BEC2BB4DDE900A47250 /* Particle.cpp */; };
 		070C1BF12BB4E04400A47250 /* PlayerGun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 070C1BEF2BB4E04400A47250 /* PlayerGun.cpp */; };
 		07BA756B2B9B8FBA00A0089D /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA75692B9B8FBA00A0089D /* GameObject.cpp */; };
 		07BA756E2B9B917600A0089D /* PlayerObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA756C2B9B917600A0089D /* PlayerObject.cpp */; };
 		07BA75712B9C163E00A0089D /* BasicAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA756F2B9C163E00A0089D /* BasicAgent.cpp */; };
 		07BA75772B9CE99800A0089D /* BasicAgentSpawner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA75752B9CE99800A0089D /* BasicAgentSpawner.cpp */; };
+		07BBB58C2BB75C30005053CA /* Explosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BBB58A2BB75C30005053CA /* Explosion.cpp */; };
 		"0B0D2FCA-D427-4218-869A-04B4BF07D335" /* ofxInputField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = "6440DEF2-4148-4C75-979E-304FD3E78C3C" /* ofxInputField.cpp */; };
 		"173B2D46-374D-44D5-86C2-28C29412AC07" /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = "A6064DBC-7C45-445D-ADEB-BDC4CBEB0BB2" /* ofxButton.cpp */; };
 		"258C87C3-6282-420C-AF17-67D512826081" /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = "1CF0A293-2D46-49F3-B919-395E6BA72E3A" /* ofxBaseGui.cpp */; };
@@ -50,8 +51,8 @@
 
 /* Begin PBXFileReference section */
 		"001EEC7B-4882-483D-8611-AF73A35FD16B" /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxSliderGroup.cpp; path = ../../../addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
-		070C1BEC2BB4DDE900A47250 /* Bullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
-		070C1BED2BB4DDE900A47250 /* Bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
+		070C1BEC2BB4DDE900A47250 /* Particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		070C1BED2BB4DDE900A47250 /* Particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Particle.hpp; sourceTree = "<group>"; };
 		070C1BEF2BB4E04400A47250 /* PlayerGun.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerGun.cpp; sourceTree = "<group>"; };
 		070C1BF02BB4E04400A47250 /* PlayerGun.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerGun.hpp; sourceTree = "<group>"; };
 		07BA75692B9B8FBA00A0089D /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
@@ -62,6 +63,8 @@
 		07BA75702B9C163E00A0089D /* BasicAgent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BasicAgent.hpp; sourceTree = "<group>"; };
 		07BA75752B9CE99800A0089D /* BasicAgentSpawner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BasicAgentSpawner.cpp; sourceTree = "<group>"; };
 		07BA75762B9CE99800A0089D /* BasicAgentSpawner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BasicAgentSpawner.hpp; sourceTree = "<group>"; };
+		07BBB58A2BB75C30005053CA /* Explosion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Explosion.cpp; sourceTree = "<group>"; };
+		07BBB58B2BB75C30005053CA /* Explosion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Explosion.hpp; sourceTree = "<group>"; };
 		"165065BF-39A1-4AEE-97B4-2CC93FF8F244" /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxGui.h; path = ../../../addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
 		191CD6FA2847E21E0085CBB6 /* of.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = of.entitlements; sourceTree = "<group>"; };
 		191EF70929D778A400F35F26 /* openFrameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = openFrameworks; path = ../../../libs/openFrameworks; sourceTree = SOURCE_ROOT; };
@@ -149,10 +152,12 @@
 				07BA75702B9C163E00A0089D /* BasicAgent.hpp */,
 				07BA75752B9CE99800A0089D /* BasicAgentSpawner.cpp */,
 				07BA75762B9CE99800A0089D /* BasicAgentSpawner.hpp */,
-				070C1BEC2BB4DDE900A47250 /* Bullet.cpp */,
-				070C1BED2BB4DDE900A47250 /* Bullet.hpp */,
+				070C1BEC2BB4DDE900A47250 /* Particle.cpp */,
+				070C1BED2BB4DDE900A47250 /* Particle.hpp */,
 				070C1BEF2BB4E04400A47250 /* PlayerGun.cpp */,
 				070C1BF02BB4E04400A47250 /* PlayerGun.hpp */,
+				07BBB58A2BB75C30005053CA /* Explosion.cpp */,
+				07BBB58B2BB75C30005053CA /* Explosion.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -280,6 +285,7 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				07BBB58C2BB75C30005053CA /* Explosion.cpp in Sources */,
 				07BA756B2B9B8FBA00A0089D /* GameObject.cpp in Sources */,
 				"258C87C3-6282-420C-AF17-67D512826081" /* ofxBaseGui.cpp in Sources */,
 				"173B2D46-374D-44D5-86C2-28C29412AC07" /* ofxButton.cpp in Sources */,
@@ -291,7 +297,7 @@
 				"A9A71A5E-CA9D-4D82-8A2D-FEC7E6D337AC" /* ofxGuiGroup.cpp in Sources */,
 				"0B0D2FCA-D427-4218-869A-04B4BF07D335" /* ofxInputField.cpp in Sources */,
 				"C0F17707-4AF0-451C-9F99-87C952745413" /* ofxLabel.cpp in Sources */,
-				070C1BEE2BB4DDE900A47250 /* Bullet.cpp in Sources */,
+				070C1BEE2BB4DDE900A47250 /* Particle.cpp in Sources */,
 				"FC3E19F9-F5CE-44A7-9ACF-56A9FF526437" /* ofxPanel.cpp in Sources */,
 				"DC3EAD35-8362-494F-8FDF-E9AA5684FEF3" /* ofxSlider.cpp in Sources */,
 				"B85C1DDB-824E-4F55-8201-77ED5BAFDBEC" /* ofxSliderGroup.cpp in Sources */,

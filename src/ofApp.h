@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "PlayerObject.hpp"
 #include "BasicAgentSpawner.hpp"
+#include "Explosion.hpp"
 #include "GameObject.hpp"
 #include "unordered_map"
 #include "ofxGui.h"
@@ -31,6 +32,7 @@ public:
     ofImage background;
     
     PlayerObject player;
+    Explosion playerExplosion;
     
     BasicAgentSpawner basicAgentSpawner;
     

@@ -7,7 +7,7 @@
 
 #ifndef BasicAgent_hpp
 #define BasicAgent_hpp
-
+#pragma once
 #import "GameObject.hpp"
 
 #endif /* BasicAgent_hpp */

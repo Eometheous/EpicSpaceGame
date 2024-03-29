@@ -93,6 +93,7 @@ void ofApp::update(){
         }
         
         if ((energyLevel <= 0 || player.gun.deviance >= 1000) && !gameWon) {
+            playerExplosion.explode(player.position, player.velocity);
             thrusterSound.stop();
             explosionSound1.play();
             explosionSound2.play();
@@ -109,6 +110,7 @@ void ofApp::update(){
     }
     
     if (gameOver) {
+        playerExplosion.update();
         player.sprite.load("sprites/dead_player.png");
         if (player.scale >= 0) {
             player.rotationalForces = 5 - player.rotationalVelocity;
@@ -137,6 +139,7 @@ void ofApp::draw(){
     
     if (gameStarted) {
         player.draw();
+        playerExplosion.draw();
         
         basicAgentSpawner.draw();
         
@@ -227,6 +230,7 @@ void ofApp::keyReleased(int key){
 }
 
 void ofApp::startGame() {
+    playerExplosion.reset();
     basicAgentSpawner.despawnAll();
     timeAlive = 0;
     startTime = ofGetElapsedTimeMillis();

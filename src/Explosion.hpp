@@ -7,7 +7,20 @@
 
 #ifndef Explosion_hpp
 #define Explosion_hpp
-
-#include <stdio.h>
+#pragma once
+#include "Particle.hpp"
 
 #endif /* Explosion_hpp */
+
+class Explosion {
+public:
+    vector<Particle*> explosionParticles;
+    bool exploding;
+    int explosionForce;
+    
+    Explosion();
+    void update();
+    void draw();
+    void explode(ofVec2f at, ofVec2f initialVelocity);
+    void reset();
+};

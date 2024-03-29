@@ -7,8 +7,8 @@
 
 #ifndef PlayerGun_hpp
 #define PlayerGun_hpp
-
-#include "Bullet.hpp"
+#pragma once
+#include "Particle.hpp"
 
 #endif /* PlayerGun_hpp */
 
@@ -27,7 +27,7 @@ public:
     ofSoundPlayer gunSound2;
     ofSoundPlayer gunSound3;
     
-    vector<Bullet> firedBullets;
+    vector<Particle> firedBullets;
     
     PlayerGun();
     void update();
