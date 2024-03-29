@@ -14,12 +14,13 @@ PlayerGun::PlayerGun() {
     firing = false;
     pos = ofVec2f();
     heading = ofVec2f();
+    deviance = 0;
 }
 
 void PlayerGun::update() {
     float time = ofGetElapsedTimeMillis();
     
-    if (firing && (time - timeSinceLastSpawned) > (1000 / fireRate)) {
+    if (firing && (time - timeSinceLastSpawned) > (1000 / fireRate) + (deviance/50) * (deviance/50)) {
         fire();
         timeSinceLastSpawned = time;
     }
@@ -39,8 +40,7 @@ void PlayerGun::draw() {
 void PlayerGun::fire() {
     Bullet newBullet;
     newBullet.position = pos;
-    newBullet.velocity = heading * 500;
-//    newBullet.rotationMatix.setRotate(ofQuaternion(heading));
+    newBullet.velocity = (heading.rotate(ofRandom(-sqrt(deviance), sqrt(deviance)))) * 500;
     firedBullets.push_back(newBullet);
 }
 

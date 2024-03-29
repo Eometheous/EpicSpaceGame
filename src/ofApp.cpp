@@ -56,7 +56,15 @@ void ofApp::update(){
         if (keymap.at('a')) player.rotationalForces = -5 * rotationForceMultiplier - player.rotationalVelocity;
         if (keymap.at('d')) player.rotationalForces = 5 * rotationForceMultiplier - player.rotationalVelocity;
         
-        player.gun.firing = keymap.at(' ');
+        if (keymap.at(' ')) {
+            player.gun.firing = true;
+            player.gun.deviance += 1;
+        }
+        else {
+            player.gun.firing = false;
+            player.gun.deviance = 0;
+        }
+        
         
         if (!gameWon) {
             timeAlive = (ofGetElapsedTimeMillis() - startTime) / 1000;
@@ -69,10 +77,13 @@ void ofApp::update(){
                 energyLevel -= 1;
             }
             
-            if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) basicAgentSpawner.killAgent(i);
+            else if (player.gun.checkHit(basicAgentSpawner.basicAgents.at(i))) basicAgentSpawner.killAgent(i);
         }
         
-        if (energyLevel <= 0) gameOver = true;
+        if (energyLevel <= 0) {
+            gameOver = true;
+            player.gun.firing = false;
+        }
         
         if (timeAlive >= timeRequiredToWin) {
             gameWon = true;
@@ -104,7 +115,7 @@ void ofApp::draw(){
     
     if (!gameStarted) {
         gui.draw();
-        ofDrawBitmapString("Press Spacebar to start the game", ofGetWindowWidth() / 2 - 120, ofGetWindowHeight() / 2 + 40);
+        ofDrawBitmapString("Press Enter to start the game", ofGetWindowWidth() / 2 - 120, ofGetWindowHeight() / 2 + 40);
     }
     
     if (gameStarted) {
@@ -135,7 +146,7 @@ void ofApp::draw(){
         ofSetColor(ofColor::white);
         ofDrawBitmapString("Game Over!", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2);
         ofDrawBitmapString(timeAliveString, (ofGetWindowWidth() / 2) - 40, (ofGetWindowHeight()) / 2 + 30);
-        ofDrawBitmapString("Press Spacebar to return to main menu", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
+        ofDrawBitmapString("Press Enter to return to main menu", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 60);
         ofDrawBitmapString("Press R to play again", ofGetWindowWidth() / 2 - 40, ofGetWindowHeight() / 2 + 90);
     }
     
@@ -155,7 +166,7 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == ' ') {
+    if (key == OF_KEY_RETURN) {
         if (!gameStarted) startGame();
         if (gameOver || gameWon) {
             basicAgentSpawner.killAll();

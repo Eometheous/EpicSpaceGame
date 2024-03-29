@@ -20,6 +20,7 @@ public:
     bool firing;
     ofVec2f pos;
     ofVec2f heading;
+    float deviance;
     
     vector<Bullet> firedBullets;
     
