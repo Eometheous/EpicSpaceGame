@@ -30,10 +30,10 @@ void ofApp::setup(){
     gui.add(movementForceMultiplier.setup("Movement Force Multiplier", 1, .1, 10));
     gui.add(rotationForceMultiplier.setup("Rotational Force Multiplier", 1, .1, 10));
     gui.add(playerScale.setup("Player Scale", 1, .5, 10));
-    gui.add(basicAgentSpawnRate.setup("Agent Spawn Rate", 5, .5, 100));
+    gui.add(basicAgentSpawnRate.setup("Agent Spawn Rate", 1, .5, 100));
     gui.add(basicAgentLifespan.setup("Agent Life Span", 12, 1, 60));
     gui.add(basicAgentSpawnLimit.setup("Agent Spawn Limit", 10, 1, 100));
-    gui.add(levelSlider.setup("Level", 1, 1, 4));
+    gui.add(levelSlider.setup("Level", 1, 1, 3));
 }
 
 //--------------------------------------------------------------
@@ -248,7 +248,7 @@ void ofApp::startGame() {
     player.sprite.load("sprites/player.png");
     energyLevel = startingEnergyLevel;
     
-    basicAgentSpawner.spawnRate = basicAgentSpawnRate * levelSlider;
+    basicAgentSpawner.spawnRate = basicAgentSpawnRate * levelSlider * 2;
     basicAgentSpawner.lifespan = basicAgentLifespan / levelSlider;
     basicAgentSpawner.basicAgentSpawnLimit = basicAgentSpawnLimit * levelSlider;
     

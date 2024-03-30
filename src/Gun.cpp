@@ -36,7 +36,7 @@ void Gun::update() {
         
     }
     else if (deviance > 0 && alive){
-        deviance -= .1;
+        deviance -= .2;
     }
     for (int i = 0; i < firedBullets.size(); i++) {
         firedBullets.at(i).update();
