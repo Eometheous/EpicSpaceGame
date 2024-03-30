@@ -5,9 +5,9 @@
 //  Created by Jonathan Thomas on 3/27/24.
 //
 
-#include "PlayerGun.hpp"
+#include "Gun.hpp"
 
-PlayerGun::PlayerGun() {
+Gun::Gun() {
     fireRate = 10;
     bulletLifeSpan = 2;
     timeSinceLastSpawned = 0;
@@ -24,7 +24,7 @@ PlayerGun::PlayerGun() {
     gunSound3.setVolume(.1);
 }
 
-void PlayerGun::update() {
+void Gun::update() {
     float time = ofGetElapsedTimeMillis();
     
     if (firing) {
@@ -44,13 +44,13 @@ void PlayerGun::update() {
     }
 }
 
-void PlayerGun::draw() {
+void Gun::draw() {
     for (int i = 0; i < firedBullets.size(); i++) {
         firedBullets.at(i).draw();
     }
 }
 
-void PlayerGun::fire() {
+void Gun::fire() {
     Particle newBullet;
     newBullet.position = pos;
     newBullet.velocity = (heading.rotate(ofRandom(-sqrt(deviance), sqrt(deviance)))) * 500;
@@ -61,11 +61,11 @@ void PlayerGun::fire() {
     else gunSound3.play();
 }
 
-void PlayerGun::despawnBullet(int i) {
+void Gun::despawnBullet(int i) {
     firedBullets.erase(firedBullets.begin() + i);
 }
 
-bool PlayerGun::checkHit(GameObject &o) {
+bool Gun::checkHit(GameObject &o) {
     for (int i = 0; i < firedBullets.size(); i++) {
         if (o.collision(&firedBullets.at(i))) {
             despawnBullet(i);

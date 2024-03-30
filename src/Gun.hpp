@@ -12,7 +12,7 @@
 
 #endif /* PlayerGun_hpp */
 
-class PlayerGun {
+class Gun {
 public:
     float fireRate;
     float bulletLifeSpan;
@@ -29,7 +29,7 @@ public:
     
     vector<Particle> firedBullets;
     
-    PlayerGun();
+    Gun();
     void update();
     void draw();
     void fire();
