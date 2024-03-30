@@ -33,6 +33,7 @@ void ofApp::setup(){
     gui.add(basicAgentSpawnRate.setup("Agent Spawn Rate", 1, .5, 100));
     gui.add(basicAgentLifespan.setup("Agent Life Span", 5, 1, 60));
     gui.add(basicAgentSpawnLimit.setup("Agent Spawn Limit", 10, 1, 100));
+    gui.add(levelSlider.setup("Level", 1, 1, 4));
 }
 
 //--------------------------------------------------------------
@@ -92,7 +93,7 @@ void ofApp::update(){
             }
         }
         
-        if ((energyLevel <= 0 || player.gun.deviance >= 1000) && !gameWon) {
+        if ((energyLevel <= 0 || player.gun.deviance >= 600) && !gameWon) {
             playerExplosion.explode(player.position, player.velocity);
             thrusterSound.stop();
             explosionSound1.play();
@@ -163,13 +164,13 @@ void ofApp::draw(){
         ofDrawRectangle(260, 20, barWidth, barHeight);
         
         ofSetColor(ofColor::red);
-        ofDrawRectangle(260, 20, (barWidth * (devianceFloat / 1000)), barHeight);
+        ofDrawRectangle(260, 20, (barWidth * (devianceFloat / 600)), barHeight);
         
         ofSetColor(ofColor::white);
         ofDrawBitmapString("Gun Stability", 300, 17);
         ofSetColor(ofColor::black);
         int deviance = player.gun.deviance;
-        ofDrawBitmapString(std::to_string(deviance) + " / 1000", 290, 37);
+        ofDrawBitmapString(std::to_string(((600.0 - deviance) / 600.0) * 100)  + " / 100", 290, 37);
         
         
         timeAliveString = "Time Alive: " + std::to_string(timeAlive);

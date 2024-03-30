@@ -68,6 +68,7 @@ public:
     ofxFloatSlider basicAgentLifespan;
     ofxIntSlider basicAgentSpawnLimit;
     
+    ofxIntSlider levelSlider;
     
     void startGame();
 };

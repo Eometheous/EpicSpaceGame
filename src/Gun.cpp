@@ -28,19 +28,19 @@ void Gun::update() {
     float time = ofGetElapsedTimeMillis();
     
     if (firing) {
-        if (time - timeSinceLastSpawned > (1000 / fireRate) + (deviance/50) * (deviance/50)) {
+        if (time - timeSinceLastSpawned > (1000 / fireRate) + 40 * (-deviance/(deviance - 610))) {
             fire();
             timeSinceLastSpawned = time;
+            if (deviance < 600) deviance += 10;
         }
-        if (deviance < 1000) deviance += 1;
+        
     }
     else if (deviance > 0 && alive){
-        deviance -= 1;
+        deviance -= .1;
     }
-    
     for (int i = 0; i < firedBullets.size(); i++) {
         firedBullets.at(i).update();
-        if (firedBullets.at(i).velocity.length() < 200) despawnBullet(i);
+        if (firedBullets.at(i).velocity.length() < 10) despawnBullet(i);
     }
 }
 
@@ -53,7 +53,7 @@ void Gun::draw() {
 void Gun::fire() {
     Particle newBullet;
     newBullet.position = pos;
-    newBullet.velocity = (heading.rotate(ofRandom(-sqrt(deviance), sqrt(deviance)))) * 500;
+    newBullet.velocity = heading.rotate(ofRandom(-(deviance * deviance)/6000, (deviance * deviance)/6000)) * 750;
     firedBullets.push_back(newBullet);
     int soundToPlay = ofRandom(3);
     if (soundToPlay == 0) gunSound1.play();
