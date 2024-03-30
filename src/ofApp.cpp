@@ -25,13 +25,13 @@ void ofApp::setup(){
     explosionSound3.load("sounds/Explosion3.wav");
     
     gui.setup();
-    gui.add(startingEnergyLevel.setup("Starting Energy", 10, 1, 100));
-    gui.add(timeRequiredToWin.setup("Time Required to Win", 30, 10, 60));
+    gui.add(startingEnergyLevel.setup("Starting Energy", 3, 1, 10));
+    gui.add(timeRequiredToWin.setup("Time Required to Win", 20, 30, 120));
     gui.add(movementForceMultiplier.setup("Movement Force Multiplier", 1, .1, 10));
     gui.add(rotationForceMultiplier.setup("Rotational Force Multiplier", 1, .1, 10));
     gui.add(playerScale.setup("Player Scale", 1, .5, 10));
-    gui.add(basicAgentSpawnRate.setup("Agent Spawn Rate", 1, .5, 100));
-    gui.add(basicAgentLifespan.setup("Agent Life Span", 5, 1, 60));
+    gui.add(basicAgentSpawnRate.setup("Agent Spawn Rate", 5, .5, 100));
+    gui.add(basicAgentLifespan.setup("Agent Life Span", 12, 1, 60));
     gui.add(basicAgentSpawnLimit.setup("Agent Spawn Limit", 10, 1, 100));
     gui.add(levelSlider.setup("Level", 1, 1, 4));
 }
@@ -104,7 +104,7 @@ void ofApp::update(){
             player.gun.alive = false;
         }
         
-        if (timeAlive >= timeRequiredToWin) {
+        if (timeAlive >= timeRequiredToWin * levelSlider) {
             gameWon = true;
             basicAgentSpawner.despawnAll();
         }
@@ -248,9 +248,9 @@ void ofApp::startGame() {
     player.sprite.load("sprites/player.png");
     energyLevel = startingEnergyLevel;
     
-    basicAgentSpawner.spawnRate = basicAgentSpawnRate;
-    basicAgentSpawner.lifespan = basicAgentLifespan;
-    basicAgentSpawner.basicAgentSpawnLimit = basicAgentSpawnLimit;
+    basicAgentSpawner.spawnRate = basicAgentSpawnRate * levelSlider;
+    basicAgentSpawner.lifespan = basicAgentLifespan / levelSlider;
+    basicAgentSpawner.basicAgentSpawnLimit = basicAgentSpawnLimit * levelSlider;
     
     gameOver = false;
     gameWon = false;
