@@ -26,7 +26,8 @@ void PlayerObject::update() {
     }
     else  {
         gun.heading = ofVec2f(0, -1).rotate(180 + euler.z * -1);
-    }}
+    }
+}
 
 void PlayerObject::draw() {
     ofMatrix4x4 translation = ofMatrix4x4();

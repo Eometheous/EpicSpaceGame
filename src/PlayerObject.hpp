@@ -7,14 +7,14 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "PlayerGun.hpp"
+#include "Gun.hpp"
 
 
 class PlayerObject: public GameObject {
 public:
     PlayerObject();
     
-    PlayerGun gun;
+    Gun gun;
     
     void update();
     void draw();

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		070C1BEE2BB4DDE900A47250 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 070C1BEC2BB4DDE900A47250 /* Particle.cpp */; };
-		070C1BF12BB4E04400A47250 /* PlayerGun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 070C1BEF2BB4E04400A47250 /* PlayerGun.cpp */; };
+		070C1BF12BB4E04400A47250 /* Gun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 070C1BEF2BB4E04400A47250 /* Gun.cpp */; };
 		07BA756B2B9B8FBA00A0089D /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA75692B9B8FBA00A0089D /* GameObject.cpp */; };
 		07BA756E2B9B917600A0089D /* PlayerObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA756C2B9B917600A0089D /* PlayerObject.cpp */; };
 		07BA75712B9C163E00A0089D /* BasicAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07BA756F2B9C163E00A0089D /* BasicAgent.cpp */; };
@@ -53,8 +53,8 @@
 		"001EEC7B-4882-483D-8611-AF73A35FD16B" /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxSliderGroup.cpp; path = ../../../addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
 		070C1BEC2BB4DDE900A47250 /* Particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		070C1BED2BB4DDE900A47250 /* Particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Particle.hpp; sourceTree = "<group>"; };
-		070C1BEF2BB4E04400A47250 /* PlayerGun.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerGun.cpp; sourceTree = "<group>"; };
-		070C1BF02BB4E04400A47250 /* PlayerGun.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerGun.hpp; sourceTree = "<group>"; };
+		070C1BEF2BB4E04400A47250 /* Gun.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Gun.cpp; sourceTree = "<group>"; };
+		070C1BF02BB4E04400A47250 /* Gun.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Gun.hpp; sourceTree = "<group>"; };
 		07BA75692B9B8FBA00A0089D /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		07BA756A2B9B8FBA00A0089D /* GameObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		07BA756C2B9B917600A0089D /* PlayerObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerObject.cpp; sourceTree = "<group>"; };
@@ -154,8 +154,8 @@
 				07BA75762B9CE99800A0089D /* BasicAgentSpawner.hpp */,
 				070C1BEC2BB4DDE900A47250 /* Particle.cpp */,
 				070C1BED2BB4DDE900A47250 /* Particle.hpp */,
-				070C1BEF2BB4E04400A47250 /* PlayerGun.cpp */,
-				070C1BF02BB4E04400A47250 /* PlayerGun.hpp */,
+				070C1BEF2BB4E04400A47250 /* Gun.cpp */,
+				070C1BF02BB4E04400A47250 /* Gun.hpp */,
 				07BBB58A2BB75C30005053CA /* Explosion.cpp */,
 				07BBB58B2BB75C30005053CA /* Explosion.hpp */,
 			);
@@ -293,7 +293,7 @@
 				07BA756E2B9B917600A0089D /* PlayerObject.cpp in Sources */,
 				07BA75772B9CE99800A0089D /* BasicAgentSpawner.cpp in Sources */,
 				"6E9A6776-FF5E-41BC-AF04-2D608FFB1C9B" /* ofxColorPicker.cpp in Sources */,
-				070C1BF12BB4E04400A47250 /* PlayerGun.cpp in Sources */,
+				070C1BF12BB4E04400A47250 /* Gun.cpp in Sources */,
 				"A9A71A5E-CA9D-4D82-8A2D-FEC7E6D337AC" /* ofxGuiGroup.cpp in Sources */,
 				"0B0D2FCA-D427-4218-869A-04B4BF07D335" /* ofxInputField.cpp in Sources */,
 				"C0F17707-4AF0-451C-9F99-87C952745413" /* ofxLabel.cpp in Sources */,
