@@ -205,7 +205,7 @@ void ofApp::exit(){
 void ofApp::keyPressed(int key){
     if (key == OF_KEY_RETURN) {
         if (!gameStarted) startGame();
-        if (gameOver || gameWon) {
+        else {
             basicAgentSpawner.killAll();
             gameOver = false;
             gameStarted = false;
